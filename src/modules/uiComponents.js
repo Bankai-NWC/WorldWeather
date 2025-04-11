@@ -308,10 +308,12 @@ function createFAQArticle(data) {
 //Weather page start
 
 async function showForecast(searchValue, tab = 1) {
-    const key = searchValue || "default";
+    const currentPlace = searchValue ?? sessionStorage.getItem("currentPlace");
+    const key = currentPlace || "default";
+
     const data = forecastCache.has(key)
         ? forecastCache.get(key)
-        : await combineWeatherDataForDay(searchValue);
+        : await combineWeatherDataForDay(currentPlace);
 
     if (!forecastCache.has(key)) forecastCache.set(key, data);
 

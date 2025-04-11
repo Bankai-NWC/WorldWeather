@@ -16,7 +16,10 @@ const aboutBtn = document.querySelector(".about-button");
 const weatherBtn = document.querySelector(".weather-button");
 const contactsBtn = document.querySelector(".contacts-button");
 
-sessionStorage.setItem("currentPlace", null);
+// sessionStorage.setItem("currentPlace", null);
+if (!sessionStorage.getItem("currentPlace")) {
+    sessionStorage.setItem("currentPlace", null);
+}
 sessionStorage.setItem("currentCoords", JSON.stringify({lat: defaultCoords.lat, lon: defaultCoords.lon,}));
 
 removeFocusOnClick();

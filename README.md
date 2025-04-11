@@ -60,7 +60,7 @@ cd WorldWeathe
 ## 🌐 API
 
 Used [OpenWeather API](https://openweathermap.org/api)  
-Get current weather, forecast and geolocation.
+Get current weather, forecast and geolocation.  
 Used [GNews API](https://gnews.io/)  
 Receive news related to weather, space, ecology.
 
