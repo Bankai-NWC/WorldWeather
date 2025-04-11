@@ -9,7 +9,7 @@ Built using JavaScript, OpenWeather API, GNews API and adaptive layout. Optimize
 
 ## 🚀 Online version
 
-Open: [https://github.com/Bankai-NWC.github.io/имя-репозитория/](https://github.com/Bankai-NWC.github.io/имя-репозитория/)
+Open: [https://bankai-nwc.github.io/WorldWeather/](https://bankai-nwc.github.io/WorldWeather/)
 
 ## 🧩 Functionality
 

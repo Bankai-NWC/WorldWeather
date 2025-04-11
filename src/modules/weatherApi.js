@@ -4,7 +4,7 @@ async function getCoordinates(searchValue = null) {
     let coords = null;
     if (searchValue) {
         try {
-            const apiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=1&appid=${API_KEY_WEATHER}`;
+            const apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=1&appid=${API_KEY_WEATHER}`;
             const response = await fetch(apiUrl);
             const data = await response.json();
             
@@ -39,7 +39,7 @@ async function getCoordinates(searchValue = null) {
 
 async function getCorrectPlaceName(lat, lon) {
     try {
-        const apiUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY_WEATHER}`;
+        const apiUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY_WEATHER}`;
 
         const response = await fetch(apiUrl);
         const data = await response.json();
