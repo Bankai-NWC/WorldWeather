@@ -338,7 +338,7 @@ async function showForecast(searchValue, tab = 1) {
             renderDailyForecast(weatherForecastGroup, data);
     }
 
-    initSearchOverlay();
+    setTimeout(initSearchOverlay, 50);
 }
 
 function initSearchOverlay() {
