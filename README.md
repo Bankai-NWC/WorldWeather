@@ -5,7 +5,7 @@ Built using JavaScript, OpenWeather API, GNews API and adaptive layout. Optimize
 
 ## 📸 Screenshot
 
-![WorldWeather Screenshot](./screenshot.png)
+![WorldWeather Screenshot](./images/screenshot.png)
 
 ## 🚀 Online version
 
