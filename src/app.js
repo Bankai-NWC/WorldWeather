@@ -16,7 +16,6 @@ const aboutBtn = document.querySelector(".about-button");
 const weatherBtn = document.querySelector(".weather-button");
 const contactsBtn = document.querySelector(".contacts-button");
 
-// sessionStorage.setItem("currentPlace", null);
 if (!sessionStorage.getItem("currentPlace")) {
     sessionStorage.setItem("currentPlace", null);
 }

@@ -337,6 +337,8 @@ async function showForecast(searchValue, tab = 1) {
         default:
             renderDailyForecast(weatherForecastGroup, data);
     }
+
+    initSearchOverlay();
 }
 
 function initSearchOverlay() {
