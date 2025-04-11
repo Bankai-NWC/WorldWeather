@@ -1,0 +1,11 @@
+.weather-menu {
+
+    &__controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        border-bottom: var(--color-dark) solid 2px;
+    }
+    
+}

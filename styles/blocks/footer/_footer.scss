@@ -1,0 +1,145 @@
+.footer {
+    background-color: var(--color-dark);
+    padding-block: 32px;
+
+    position: relative;
+    z-index: 5;
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include mobile {
+            flex-direction: column;
+            gap: var(--gap-extra-small);
+        }
+    }
+
+    &__menu {
+        padding-top: 16px;
+        margin-left: auto;
+        font-size: 24px;
+
+        &-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: var(--gap-medium);
+
+            @include mobile {
+                flex-direction: column;
+            }
+        }
+
+        &-link {
+            @include reset-button;
+            @include reset-borders;
+
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            height: 30px;
+            color: var(--color-light);
+
+            @include hover {
+                color: var(--color-light-alt);
+            }
+
+            &:focus {
+                color: var(--color-light-alt);
+            }
+        }
+    }
+
+    &__items {
+        display: flex;
+        gap: var(--gap-small);
+    }
+
+    &__item {
+        @include reset-borders;
+        @include square(44px);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 2px solid white;
+        border-radius: 50%;
+        padding: 8px;
+
+        &.facebook {
+            @include hover {
+                background-color: rgb(62, 68, 150);
+            }
+
+            &:focus {
+                border: 2px solid white;
+                background-color: rgb(62, 68, 150);
+            }
+        }
+
+        &.twitter {
+            @include hover {
+                background-color: rgb(0, 0, 0);
+            }
+
+            &:focus {
+                border: 2px solid white;
+                background-color: rgb(0, 0, 0);
+            }
+        }
+
+        &.instagram {
+            @include hover {
+                background: linear-gradient(225.00deg, rgb(189, 73, 73) 16.794%,rgb(215, 155, 57) 44.961%,rgb(194, 76, 207) 76.109%,rgb(76, 59, 228) 100%);
+            }
+
+            &:focus {
+                border: 2px solid white;
+                background: linear-gradient(225.00deg, rgb(189, 73, 73) 16.794%,rgb(215, 155, 57) 44.961%,rgb(194, 76, 207) 76.109%,rgb(76, 59, 228) 100%);
+            }
+        }
+
+        &.youtube {
+            @include hover {
+                background-color: rgb(196, 48, 43);
+            }
+
+            &:focus {
+                border: 2px solid white;
+                background-color: rgb(196, 48, 43);
+            }
+        }
+    }
+
+    &__created-by {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 32px;
+
+        p {
+            color: var(--color-light-alt);
+            font-size: 14px;
+
+            a {
+                @include hover {
+                    color: var(--color-light);
+                }
+
+                &:focus {
+                    @include reset-borders;
+                    color: var(--color-light);
+                }
+            }
+        }
+    }
+}

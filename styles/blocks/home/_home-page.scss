@@ -1,0 +1,10 @@
+.home-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "our-successes our-successes our-successes our-successes"
+        "why-trust why-trust why-trust why-trust"
+        "news news news news";
+    gap: var(--gap-medium);
+}

@@ -1,0 +1,23 @@
+<svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip81_1436">
+			<rect id="8666699_sun_icon" width="24.000000" height="24.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<rect id="icon" width="24.000000" height="24.000000" fill="#FFFFFF" fill-opacity="0"/>
+	<g clip-path="url(#clip81_1436)">
+		<circle id="circle" cx="12.000000" cy="12.000000" r="5.000000" fill="#000000" fill-opacity="0"/>
+		<circle id="circle" cx="12.000000" cy="12.000000" r="5.000000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000" stroke-linejoin="round"/>
+		<line id="line" x1="12.000000" y1="1.000000" x2="12.000000" y2="3.000000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000"/>
+		<line id="line" x1="12.000000" y1="21.000000" x2="12.000000" y2="23.000000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000"/>
+		<line id="line" x1="4.219971" y1="4.219971" x2="5.639954" y2="5.640015" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000"/>
+		<line id="line" x1="18.359985" y1="18.359985" x2="19.779968" y2="19.780029" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000"/>
+		<line id="line" x1="1.000000" y1="12.000000" x2="3.000000" y2="12.000000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000"/>
+		<line id="line" x1="21.000000" y1="12.000000" x2="23.000000" y2="12.000000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000"/>
+		<line id="line" x1="4.219971" y1="19.780029" x2="5.639954" y2="18.359985" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000"/>
+		<line id="line" x1="18.359985" y1="5.640015" x2="19.779968" y2="4.219971" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="2.000000"/>
+	</g>
+</svg>

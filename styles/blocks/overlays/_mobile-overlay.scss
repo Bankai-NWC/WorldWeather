@@ -1,0 +1,47 @@
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  &__inner {
+    background-color: var(--color-dark);
+    padding: 2rem;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 8px;
+    text-align: center;
+
+    transform: translateY(-20px);
+    transition: transform 0.4s ease;
+
+    &--search {
+      display: flex;
+      background-color: transparent;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      transform: translateY(calc(var(--index) * -15));
+    }
+  }
+
+  &.active &__inner {
+    transform: translateY(0);
+  }
+}

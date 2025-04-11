@@ -1,0 +1,67 @@
+.weather-menu {
+
+    &__search {
+        @include reset-borders;
+
+        position: relative;
+        display: flex;
+        background-color: transparent;
+        color: var(--color-dark);
+        transition-duration: var(--transition-duration);
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            translate: -50%;
+            width: 0;
+            height: 2px;
+            background-color: currentColor;
+            transition-duration: inherit;
+        }
+
+        &:focus-within {
+            color: var(--color-accent);
+            background-color: var(--color-gray);
+
+            &::after {
+                width: 100%;
+            }
+        }
+
+        @include hover {
+            background-color: var(--color-gray);
+        }
+    }
+
+    &__input {
+        @include reset-borders;
+
+        position: relative;
+        padding: 10px 12px;
+        color: var(--color-dark);
+        background-color: inherit;
+    }
+
+    &__search-button {
+        @include reset-button;
+        @include reset-borders;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 12px;
+        background-color: inherit;
+
+        @include tablet {
+            padding: 0 8px;
+        }
+
+        &.mobile-search-btn {
+            @include reset-button;
+            padding: 8px 10px;
+        }
+    }
+
+}

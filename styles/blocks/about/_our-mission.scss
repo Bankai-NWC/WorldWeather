@@ -1,0 +1,21 @@
+.our-mission {
+    @include mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__title {
+        color: var(--color-dark);
+
+        @include mobile {
+            text-align: center;
+        }
+    }
+
+    &__paragraph {
+        color: var(--color-dark);
+        text-align: justify;
+    }
+}

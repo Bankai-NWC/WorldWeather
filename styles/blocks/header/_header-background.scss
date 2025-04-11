@@ -1,0 +1,107 @@
+.layers {
+    perspective: 1000px;
+    overflow: hidden;
+
+    &__container {
+        height: 100vh;
+        transform-style: preserve-3d;
+        transform: rotateX(var(--move-y)) rotateY(var(--move-x));
+        will-change: transform;
+        transition: transform var(--transition-preview);
+
+        @include tablet {
+            transform: rotateX(0deg) rotateY(0deg);
+        }
+        @include mobile {
+            transform: rotateX(0deg) rotateY(0deg);
+        }
+    }
+
+    &__item {
+        position: absolute;
+        z-index: -5;
+        inset: -5vw;
+        pointer-events: none;
+
+        .layer-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            backface-visibility: hidden;
+            will-change: transform;
+            pointer-events: none;
+            user-select: none;
+        }
+    }
+
+    .layer-bg {
+        transform: translateZ(-25px) scale(1.06);
+    }
+
+    .layer-slogan {
+        @include flex-center(false);
+    
+        transform: translateZ(180px) scale(.9);
+        pointer-events: none;
+
+        .hero-content {
+            pointer-events: auto;
+            text-align: center;
+            text-transform: uppercase;
+
+            &__title span {
+                display: block;
+            }
+        }
+    }
+      
+    .layer-timber {
+      transform: translateZ(110px) scale(0.88);
+    
+      @include tablet {
+        display: none;
+      }
+    
+      @include mobile {
+        display: none;
+      }
+    }
+      
+    .layer-leaves {
+      transform: translateZ(250px) scale(0.9);
+    
+      @include tablet {
+        display: none;
+      }
+    
+      @include mobile {
+        display: none;
+      }
+    }
+      
+    .layer-glare {
+      transform: translateZ(260px) scale(0.9);
+    
+      @include tablet {
+        display: none;
+      }
+    
+      @include mobile {
+        display: none;
+      }
+    }
+
+    .layer-menu {
+        transform: translateZ(-20px);
+        padding-top: calc(5vw + 32px);
+        pointer-events: auto;
+    
+        @include mobile {
+            padding-top: calc(5vw + 16px);
+        }
+    }
+
+}

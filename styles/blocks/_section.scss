@@ -1,0 +1,11 @@
+.section {
+    padding-block: var(--section-padding-y-desktop);
+
+    @include tablet {
+        padding-block: var(--section-padding-y-mobile);
+    }
+
+    @include mobile {
+        padding-block: var(--section-padding-y-mobile);
+    }
+}

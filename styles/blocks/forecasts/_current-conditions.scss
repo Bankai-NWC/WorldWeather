@@ -1,0 +1,105 @@
+.current-conditions {
+    display: flex;
+    justify-content: space-between;
+    grid-area: current-conditions;
+
+    @include mobile {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &__list {
+        width: 100%;
+        max-width: 25%;
+
+        &:first-child {
+            width: 100%;
+            max-width: 40%;
+
+            @include mobile {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        &:last-child {
+            @include mobile {
+                margin-top: 16px;
+            }
+        }
+
+        &.location-weather {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        @include mobile {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        height: 32px;
+        margin-bottom: 8px;
+
+        &:last-child {
+            margin: 0;
+        }
+
+        &.location-date {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: baseline;
+            column-gap: 16px;
+        }
+    }
+
+    &__date {
+        @include fluid-text(18, 14);
+    }
+
+    &__label {
+        color: var(--color-light-alt);
+    }
+
+    &__weather {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        img {
+            width: 120px;
+            height: auto;
+            transition-duration: .6s;
+
+            @include tablet {
+                width: 88px;
+                height: auto;
+            }
+    
+            @include mobile {
+                width: 54px;
+                height: auto;
+            }
+        }
+    }
+
+    &__temperature {
+        font-size: 144px;
+        transition-duration: .6s;
+
+        @include tablet {
+            font-size: 96px;
+        }
+
+        @include mobile {
+            font-size: 64px;
+        }
+    }
+}

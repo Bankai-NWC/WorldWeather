@@ -1,0 +1,46 @@
+.weather-forecast {
+    &__group {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        gap: var(--gap-medium);
+        grid-template-areas:
+            "current-conditions current-conditions current-conditions"
+            "today today air-quality"
+            "maps maps air-quality";
+        margin-top: 32px;
+
+        &.daily-forecast {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @include mobile {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @include tablet {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto auto;
+            gap: var(--gap-medium);
+            grid-template-areas:
+                "current-conditions"
+                "today"
+                "air-quality"
+                "maps";
+        }
+    }
+
+    &__item {
+        background-color: var(--color-dark);
+        border-radius: var(--border-radius);
+        padding: var(--article-padding-desktop);
+
+        @include mobile {
+            padding: var(--article-padding-mobile);
+        }
+    }
+
+}

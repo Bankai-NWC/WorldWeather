@@ -1,0 +1,72 @@
+.daily-forecast {
+    &__item {
+        display: flex;
+        align-items: center;
+        column-gap: var(--gap-extra-small);
+    }
+
+    &__location-date {
+        display: flex;
+        align-items: baseline;
+        column-gap: var(--gap-extra-small);
+    }
+
+    &__location {
+        color: var(--color-dark);
+    }
+
+    &__date-range {
+        color: var(--color-light-alt);
+    }
+
+    &__temp {
+        width: 88px;
+
+        @include mobile {
+            width: 50px;
+        }
+    }
+
+    &__rightColumn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 60%;
+    
+        .humidity, .pop, .wind-speed, .pressure {
+            width: 100%;
+        }
+    
+        @include mobile {
+            flex-wrap: wrap;
+            max-width: 45%;
+            row-gap: 4px;
+        }
+    }
+
+    &__content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 8px;
+
+        @include mobile {
+            align-items: flex-start;
+        }
+    }
+
+    &__leftColumn {
+        display: flex;
+        align-items: center;
+        column-gap: 24px;
+        width: 100%;
+        max-width: 40%;
+
+        @include mobile {
+            max-width: 35%;
+            column-gap: var(--gap-extra-small);
+        }
+    }
+    
+}

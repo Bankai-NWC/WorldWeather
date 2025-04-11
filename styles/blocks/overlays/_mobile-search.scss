@@ -1,0 +1,20 @@
+.mobile-search {
+    &__input {
+        @include reset-borders;
+        @include fluid-text(14, 18);
+
+        width: 100%;
+        height: var(--input-height);
+        padding: 8px;
+    }
+
+    &__submit {
+        @include reset-button;
+        @include reset-borders;
+
+        padding-inline: 16px;
+        background-color: var(--color-light);
+        color: var(--color-dark);
+        cursor: pointer;
+    }
+}

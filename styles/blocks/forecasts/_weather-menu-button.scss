@@ -1,0 +1,51 @@
+.weather-menu {
+    
+    &__button {
+        @include reset-button;
+        @include reset-borders;
+
+        position: relative;
+        color: var(--color-dark);
+        padding: 10px 32px;
+        font-weight: 500;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            translate: -50%;
+            width: 0;
+            height: 2px;
+            background-color: currentColor;
+            transition-duration: inherit;
+        }
+
+        &:focus {
+            color: var(--color-accent);
+            background-color: var(--color-gray);
+
+            &::after {
+                width: 100%;
+            }
+        }
+
+        &--active {
+            color: var(--color-accent);
+            background-color: var(--color-gray);
+
+            &::after {
+                width: 100%;
+            }
+        }
+
+        @include hover {
+            background-color: var(--color-gray);
+        }
+
+        @include mobile {
+            padding: 10px 16px;
+        }
+    }
+
+}

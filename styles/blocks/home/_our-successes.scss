@@ -1,0 +1,57 @@
+.our-successes {
+    grid-area: our-successes;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: var(--gap-medium);
+
+    @include tablet {
+        grid-template-columns: 1fr 1fr;
+        grid-row: auto;
+        gap: 16px;
+    }
+
+    @include mobile {
+        grid-template-columns: 1fr 1fr;
+        grid-row: auto;
+        gap: 16px;
+    }
+
+    &__card {
+        border-radius: var(--border-radius);
+        background-color: var(--color-dark);
+        aspect-ratio: 1;
+        padding: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include mobile {
+            padding: 16px;
+        }
+    }
+
+    &__content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__title {
+        text-align: center;
+        height: 4rem;
+        text-transform: uppercase;
+        @include fluid-text(20, 16);
+        font-weight: 500;
+
+        @include mobile {
+            height: auto;
+        }
+    }
+
+    &__value {
+        text-align: center;
+        @include fluid-text(96, 32);
+        font-weight: 500;
+    }
+}

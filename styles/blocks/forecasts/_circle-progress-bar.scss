@@ -1,0 +1,37 @@
+.progress-bar__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100px;
+    height: 100px;
+}
+
+.progress-circle {
+    transform: rotate(90deg);
+    transform-origin: center;
+    transition: stroke-dashoffset 0.8s ease-in-out;
+}
+
+.progress-text__value-substance {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .progress-text__value {
+        @include fluid-text(24, 18);
+    }
+    
+    .progress-text__substance {
+        @include fluid-text(18, 16);
+    }
+
+    .progress-text__substance {
+        color: var(--color-light-alt);
+    }
+}
