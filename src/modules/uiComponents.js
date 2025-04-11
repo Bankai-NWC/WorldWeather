@@ -82,10 +82,9 @@ async function createWhyTrustArticle() {
     button.className = "why-trust__button";
     button.textContent = "weather forecast";
     button.addEventListener('click', async () => {
-        const header = document.querySelector(".header");
         const main = document.querySelector(".content");
-        main.classList.add("content--loading");
         setMenuButtonsClasses(weatherBtn, [homeBtn, aboutBtn, contactsBtn]);
+        main.classList.add("content--loading");
         main.replaceChildren();
         await showForecast();
         main.classList.remove("content--loading");
