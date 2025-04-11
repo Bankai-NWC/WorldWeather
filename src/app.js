@@ -87,7 +87,7 @@ async function combineWeatherDataForDay(searchValue) {
     };
 
     return data;
-};
+}
 
 function setCurrentCoords(coords) {
     const currentCoords = JSON.parse(sessionStorage.getItem("currentCoords"));
@@ -95,7 +95,7 @@ function setCurrentCoords(coords) {
     if (currentCoords.lat !== coords.lat || currentCoords.lon !== coords.lon) {
         sessionStorage.setItem("currentCoords", JSON.stringify({lat: coords.lat, lon: coords.lon,}));
     }
-};
+}
 
 function initButtons() {
     document.querySelectorAll(".about-button").forEach(button => {
@@ -255,14 +255,13 @@ function initButtons() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    initSearchOverlay();
-    initButtons();
-
     const openSearchBtn = document.querySelector('.open-search-button');
     openSearchBtn?.addEventListener('click', openSearchOverlay);
 
     const main = document.querySelector(".content");
     await showForecast();
+    initSearchOverlay();
+    initButtons();
     scrollToContent(main, "smooth", 50);
 });
 

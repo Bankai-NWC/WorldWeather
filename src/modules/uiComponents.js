@@ -4,6 +4,7 @@ import { getWeatherImage, convertAirQualityScale, setMapsButtonClass, setMenuBut
 import { fetchNews } from './newsApi.js';
 
 let map;
+const forecastCache = new Map();
 
 //Home page start
 
@@ -307,7 +308,13 @@ function createFAQArticle(data) {
 //Weather page start
 
 async function showForecast(searchValue, tab = 1) {
-    const data = await combineWeatherDataForDay(searchValue);
+    const key = searchValue || "default";
+    const data = forecastCache.has(key)
+        ? forecastCache.get(key)
+        : await combineWeatherDataForDay(searchValue);
+
+    if (!forecastCache.has(key)) forecastCache.set(key, data);
+
     const currentCoords = JSON.parse(sessionStorage.getItem("currentCoords"));
 
     const main = document.querySelector(".content");
@@ -328,8 +335,6 @@ async function showForecast(searchValue, tab = 1) {
         default:
             renderDailyForecast(weatherForecastGroup, data);
     }
-
-    initSearchOverlay();
 }
 
 function initSearchOverlay() {
