@@ -72,67 +72,15 @@ async function getTodayWeather(searchValue) {
     return fetchWeatherData('weather', searchValue);
 }
 
-async function getFiveDayForecast(searchValue) {
-    const data = await fetchWeatherData('forecast', searchValue);
-
-    try {
-        const forecastByDay = {};
-
-        data.list.forEach(entry => {
-            const date = new Date(entry.dt * 1000);
-            const dayKey = date.toISOString().split('T')[0];
-
-            if (!forecastByDay[dayKey]) {
-                forecastByDay[dayKey] = [];
-            }
-            forecastByDay[dayKey].push(entry);
-        });
-
-        const dailyForecast = [];
-
-        Object.keys(forecastByDay).slice(0, 5).forEach(dayKey => {
-            const entries = forecastByDay[dayKey];
-
-            let middayEntry = entries.find(e => e.dt_txt.includes("12:00:00"));
-
-            if (!middayEntry) {
-                middayEntry = entries.reduce((prev, curr) => {
-                    const prevHour = new Date(prev.dt * 1000).getHours();
-                    const currHour = new Date(curr.dt * 1000).getHours();
-                    return Math.abs(currHour - 12) < Math.abs(prevHour - 12) ? curr : prev;
-                });
-            }
-
-            const date = new Date(middayEntry.dt * 1000);
-
-            dailyForecast.push({
-                minTemp: Math.round(Math.min(...entries.map(e => e.main.temp_min))),
-                maxTemp: Math.round(Math.max(...entries.map(e => e.main.temp_max))),
-                weatherDescription: middayEntry.weather[0].description.charAt(0).toUpperCase() + middayEntry.weather[0].description.slice(1),
-                humidity: middayEntry.main.humidity,
-                pop: Math.round(middayEntry.pop * 100),
-                windSpeed: middayEntry.wind.speed,
-                pressure: middayEntry.main.pressure,
-                sys: middayEntry.sys?.pod || '',
-                dateFormatted: date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }),
-                rangeOfDate: date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' }),
-            });
-        });
-
-        return dailyForecast;
-    } catch (error) {
-        console.error("Error in getting the forecast:", error);
-        return [];
-    }
-}
-
 async function getAirQuality(searchValue) {
     return fetchWeatherData('air_pollution', searchValue);
 }
 
-async function getTemperaturesByTimeOfDay(searchValue) {
+async function getForecastSummary(searchValue) {
     const data = await fetchWeatherData('forecast', searchValue);
+    if (!data || !data.list) return { dailyForecast: [], dailyTemps: {}, averagePop: 0 };
 
+    const forecastByDay = {};
     const dailyTemps = {
         morning: { sum: 0, count: 0 },
         day: { sum: 0, count: 0 },
@@ -140,10 +88,20 @@ async function getTemperaturesByTimeOfDay(searchValue) {
         night: { sum: 0, count: 0 },
     };
 
-    data.list.forEach(entry => {
-        const hour = entry.dt_txt.split(" ")[1];
+    const today = new Date().toISOString().split("T")[0];
+    const todayForecasts = [];
 
-        if (["06:00:00", "09:00:00"].includes(hour)) { 
+    data.list.forEach(entry => {
+        const date = new Date(entry.dt * 1000);
+        const dayKey = date.toISOString().split('T')[0];
+
+        if (!forecastByDay[dayKey]) forecastByDay[dayKey] = [];
+        forecastByDay[dayKey].push(entry);
+
+        if (entry.dt_txt.startsWith(today)) todayForecasts.push(entry);
+
+        const hour = entry.dt_txt.split(" ")[1];
+        if (["06:00:00", "09:00:00"].includes(hour)) {
             dailyTemps.morning.sum += entry.main.temp;
             dailyTemps.morning.count++;
         }
@@ -155,37 +113,54 @@ async function getTemperaturesByTimeOfDay(searchValue) {
             dailyTemps.evening.sum += entry.main.temp;
             dailyTemps.evening.count++;
         }
-        if (["00:00:00", "03:00:00"].includes(hour)) { 
+        if (["00:00:00", "03:00:00"].includes(hour)) {
             dailyTemps.night.sum += entry.main.temp;
             dailyTemps.night.count++;
         }
     });
 
+    const dailyForecast = Object.keys(forecastByDay).slice(0, 5).map(dayKey => {
+        const entries = forecastByDay[dayKey];
+        let middayEntry = entries.find(e => e.dt_txt.includes("12:00:00"));
+
+        if (!middayEntry) {
+            middayEntry = entries.reduce((prev, curr) => {
+                const prevHour = new Date(prev.dt * 1000).getHours();
+                const currHour = new Date(curr.dt * 1000).getHours();
+                return Math.abs(currHour - 12) < Math.abs(prevHour - 12) ? curr : prev;
+            });
+        }
+
+        const date = new Date(middayEntry.dt * 1000);
+
+        return {
+            minTemp: Math.round(Math.min(...entries.map(e => e.main.temp_min))),
+            maxTemp: Math.round(Math.max(...entries.map(e => e.main.temp_max))),
+            weatherDescription: middayEntry.weather[0].description.charAt(0).toUpperCase() + middayEntry.weather[0].description.slice(1),
+            humidity: middayEntry.main.humidity,
+            pop: Math.round(middayEntry.pop * 100),
+            windSpeed: middayEntry.wind.speed,
+            pressure: middayEntry.main.pressure,
+            sys: middayEntry.sys?.pod || '',
+            dateFormatted: date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }),
+            rangeOfDate: date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' }),
+        };
+    });
+
+    const averagePop = todayForecasts.length
+        ? Math.round(todayForecasts.reduce((sum, item) => sum + item.pop, 0) / todayForecasts.length * 100)
+        : 0;
+
     for (const key in dailyTemps) {
-        dailyTemps[key] = dailyTemps[key].count > 0 
-            ? (dailyTemps[key].sum / dailyTemps[key].count).toFixed(1) 
-            : null;
+        const t = dailyTemps[key];
+        dailyTemps[key] = t.count > 0 ? (t.sum / t.count).toFixed(1) : null;
     }
 
-    return dailyTemps;
+    return {
+        dailyForecast,
+        dailyTemps,
+        averagePop,
+    };
 }
 
-async function getProbabilityOfPrecipitation(searchValue) {
-    const data = await fetchWeatherData('forecast', searchValue);
-
-    const today = new Date().toISOString().split("T")[0];
-
-    const todayForecasts = data.list.filter(item => 
-        item.dt_txt.startsWith(today)
-    );
-
-    if (todayForecasts.length === 0) return 0;
-
-    const totalPop = todayForecasts.reduce((sum, item) => sum + item.pop, 0);
-    const averagePop = (totalPop / todayForecasts.length) * 100;
-
-    return Math.round(averagePop);
-}
-
-export { getCoordinates, getCorrectPlaceName, fetchWeatherData, getTodayWeather,
-    getFiveDayForecast, getAirQuality, getTemperaturesByTimeOfDay, getProbabilityOfPrecipitation };
+export { getCoordinates, getCorrectPlaceName, fetchWeatherData, getTodayWeather, getAirQuality, getForecastSummary };

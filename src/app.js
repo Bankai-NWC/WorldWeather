@@ -1,5 +1,4 @@
-import { getCorrectPlaceName, getTodayWeather,
-    getFiveDayForecast, getAirQuality, getTemperaturesByTimeOfDay, getProbabilityOfPrecipitation} from './modules/weatherApi.js';
+import { getCorrectPlaceName, getTodayWeather, getAirQuality, getForecastSummary } from './modules/weatherApi.js';
 import {formatDate, getWeatherImage, calculateDewPoint, calculateUVIndex, scrollToContent, 
     setMenuButtonsClasses, removeFocusOnClick, getSysPeriod } from './modules/utils.js';
 import { showForecast, showHomePage, showAboutPage, showContactsPage, initSearchOverlay } from './modules/uiComponents.js';
@@ -24,12 +23,14 @@ removeFocusOnClick();
 
 async function combineWeatherDataForDay(searchValue) {
     const weatherData = await getTodayWeather(searchValue);
-    const tempForDay = await getTemperaturesByTimeOfDay(searchValue);
-    const pop = await getProbabilityOfPrecipitation(searchValue);
+    const forecastSummary = await getForecastSummary(searchValue);
     const airQuality = await getAirQuality(searchValue);
-    const dailyForecast  = await getFiveDayForecast(searchValue);
     const coords = JSON.parse(sessionStorage.getItem("currentCoords"));
     const sys = getSysPeriod(weatherData.dt, weatherData.timezone);
+
+    const tempForDay = forecastSummary.dailyTemps;
+    const pop = forecastSummary.averagePop;
+    const dailyForecast = forecastSummary.dailyForecast;
 
     const data = {
         place: await getCorrectPlaceName(coords.lat, coords.lon) ?? 'Unknown place',
@@ -64,10 +65,10 @@ async function combineWeatherDataForDay(searchValue) {
         humidity: weatherData?.main?.humidity ?? 0,
         pressure: weatherData?.main?.pressure ?? 0,
         visibility: weatherData?.visibility === 10000
-        ? 'No limits'
-        : isNaN(weatherData?.visibility / 1000)
-          ? '--'
-          : Math.round((weatherData?.visibility ?? 0) / 1000),
+            ? 'No limits'
+            : isNaN(weatherData?.visibility / 1000)
+              ? '--'
+              : Math.round((weatherData?.visibility ?? 0) / 1000),
         dewPoint: calculateDewPoint(weatherData?.main?.temp ?? 0, weatherData?.main?.humidity ?? 0),
         uvIndex: calculateUVIndex(weatherData?.coord?.lat ?? 0,
             weatherData?.clouds?.all ?? 0,

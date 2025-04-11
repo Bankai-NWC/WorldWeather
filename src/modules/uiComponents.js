@@ -175,6 +175,9 @@ async function createNewsArticle() {
 function showAboutPage() {
     const main = document.querySelector(".content");
     main.replaceChildren();
+
+    const fragment = document.createDocumentFragment();
+
     const section = document.createElement("section");
     section.className = "about-page container section";
 
@@ -203,7 +206,9 @@ function showAboutPage() {
 
     section.append(aboutUsArticle, OurMissionArticle, FAQArticle);
 
-    main.appendChild(section);
+    fragment.appendChild(section);
+
+    main.appendChild(fragment);
 }
 
 function createAboutUsArticle() {
