@@ -353,6 +353,11 @@ h3 {
   width: 48px;
   aspect-ratio: 1;
   position: relative;
+  pointer-events: auto;
+  z-index: 9999;
+  will-change: auto !important;
+  right: -85.4vw;
+  top: -96.4vh;
 }
 .burger-menu::after {
   position: absolute;

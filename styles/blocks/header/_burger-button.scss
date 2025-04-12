@@ -3,6 +3,11 @@
     @include square(48px);
 
     position: relative;
+    pointer-events: auto;
+    z-index: 9999;
+    will-change: auto !important;
+    right: -85.4vw;
+    top: -96.4vh;
 
     &::after {
         @include abs-center;
