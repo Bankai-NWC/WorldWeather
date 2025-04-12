@@ -236,18 +236,40 @@ function initButtons() {
         });
     });
 
-    function openMobileMenu() {
-        mobileMenu.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
     function closeMobileMenu() {
         mobileMenu.classList.remove('active');
         document.body.style.overflow = '';
     }
 
-    burgerButton.addEventListener('click', openMobileMenu);
-    closeButton.addEventListener('click', closeMobileMenu);
+    let touchHandled = false;
+
+    function handleOpenMobileMenu(e) {
+        if (touchHandled && e.type === 'click') return;
+        touchHandled = e.type === 'touchstart';
+
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Сброс флага через 500 мс
+        setTimeout(() => touchHandled = false, 500);
+    }
+
+    function handleCloseMobileMenu(e) {
+        if (touchHandled && e.type === 'click') return;
+        touchHandled = e.type === 'touchstart';
+
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+
+        // Сброс флага через 500 мс
+        setTimeout(() => touchHandled = false, 500);
+    }
+
+    burgerButton.addEventListener('touchstart', handleOpenMobileMenu, { passive: true });
+    burgerButton.addEventListener('click', handleOpenMobileMenu);
+
+    closeButton.addEventListener('touchstart', handleCloseMobileMenu, { passive: true });
+    closeButton.addEventListener('click', handleCloseMobileMenu);
 
     mobileMenu.addEventListener('click', (e) => {
         if (e.target === mobileMenu) {

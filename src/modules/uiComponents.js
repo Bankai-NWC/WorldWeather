@@ -502,6 +502,7 @@ function createWeatherMenu() {
     searchIcon.setAttribute("width", "24");
     searchIcon.setAttribute("height", "24");
     searchIcon.setAttribute("src", "./images/svg/icons/search.svg");
+    searchIcon.setAttribute("alt", "Search icon");
     searchIcon.setAttribute("loading", "lazy");
     
     searchButton.appendChild(searchIcon);
@@ -969,7 +970,9 @@ function dailyForecast(data) {
     return forecastArticle;
 }
 
-function createOrUpdateMap(coords, mapType = "temp_new") {
+async function createOrUpdateMap(coords, mapType = "temp_new") {
+    await loadLeaflet(); // 👉 ленивый импорт Leaflet
+
     if (map) {
         map.off();
         map.remove();
@@ -979,12 +982,10 @@ function createOrUpdateMap(coords, mapType = "temp_new") {
     if (!map) {
         map = L.map("map", {
             minZoom: 5,
-            maxBounds: [
-                [85, -180], 
-                [-85, 180]
-            ],
-            maxBoundsViscosity: 1.0
+            maxBounds: [[85, -180], [-85, 180]],
+            maxBoundsViscosity: 1.0,
         }).setView([coords.lat, coords.lon], 10);
+
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
             attribution: "© OpenStreetMap",
         }).addTo(map);
@@ -992,36 +993,42 @@ function createOrUpdateMap(coords, mapType = "temp_new") {
         map.setView([coords.lat, coords.lon], 10);
     }
 
-    if (map.legend) {
-        map.removeControl(map.legend);
-    }
+    if (map.legend) map.removeControl(map.legend);
 
     map.legend = L.control({ position: "bottomright" });
-
-    map.legend.onAdd = function () {
-        let div = L.DomUtil.create("div", "gradient-legend");
-        let legendData = getLegendData(mapType);
-
+    map.legend.onAdd = () => {
+        const div = L.DomUtil.create("div", "gradient-legend");
+        const legendData = getLegendData(mapType);
         div.innerHTML = `
             <div class="legend-title">${legendData.title}</div>
-            <div class="gradient-bar">
-                ${legendData.labels.map(label => `<span>${label}</span>`).join("")}
-            </div>
-            <div class="gradient-line" style="background: ${legendData.gradient};"></div>
-        `;
+            <div class="gradient-bar">${legendData.labels.map(label => `<span>${label}</span>`).join("")}</div>
+            <div class="gradient-line" style="background: ${legendData.gradient};"></div>`;
         return div;
     };
-
     map.legend.addTo(map);
 
-    if (map.weatherLayer) {
-        map.removeLayer(map.weatherLayer);
-    }
-
+    if (map.weatherLayer) map.removeLayer(map.weatherLayer);
     map.weatherLayer = L.tileLayer(
         `https://tile.openweathermap.org/map/${mapType}/{z}/{x}/{y}.png?appid=${API_KEY_WEATHER}`,
         { attribution: "© OpenWeatherMap" }
     ).addTo(map);
+}
+
+async function loadLeaflet() {
+    if (window.L) return;
+
+    return new Promise((resolve, reject) => {
+        const leafletCss = document.createElement("link");
+        leafletCss.rel = "stylesheet";
+        leafletCss.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+        document.head.appendChild(leafletCss);
+
+        const leafletJs = document.createElement("script");
+        leafletJs.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+        leafletJs.onload = resolve;
+        leafletJs.onerror = reject;
+        document.body.appendChild(leafletJs);
+    });
 }
 
 function getLegendData(mapType) {
