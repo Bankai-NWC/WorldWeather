@@ -1,4 +1,4 @@
-import { getCorrectPlaceName, getTodayWeather, getAirQuality, getForecastSummary } from './modules/weatherApi.js';
+import { getCorrectPlaceName, getTodayWeather, getAirQuality, getForecastSummary, getCoordinates } from './modules/weatherApi.js';
 import {formatDate, getWeatherImage, calculateDewPoint, calculateUVIndex, scrollToContent, 
     setMenuButtonsClasses, removeFocusOnClick, getSysPeriod } from './modules/utils.js';
 import { showForecast, showHomePage, showAboutPage, showContactsPage, initSearchOverlay } from './modules/uiComponents.js';
@@ -18,7 +18,7 @@ const contactsBtn = document.querySelector(".contacts-button");
 
 if (!sessionStorage.getItem("currentPlace")) {
     sessionStorage.setItem("currentPlace", null);
-}
+};
 sessionStorage.setItem("currentCoords", JSON.stringify({lat: defaultCoords.lat, lon: defaultCoords.lon,}));
 
 removeFocusOnClick();
@@ -89,6 +89,25 @@ async function combineWeatherDataForDay(searchValue) {
     };
 
     return data;
+}
+
+async function initWeatherAtStart() {
+    try {
+        const coords = await getCoordinates();
+        const place = await getCorrectPlaceName(coords.lat, coords.lon);
+
+        sessionStorage.setItem("currentPlace", place);
+        sessionStorage.setItem("currentCoords", JSON.stringify(coords));
+
+        await showForecast(place);
+    } catch (error) {
+        console.warn("Geolocation failed or was denied. Using default city.");
+
+        const fallbackPlace = "London";
+        sessionStorage.setItem("currentPlace", fallbackPlace);
+
+        await showForecast(fallbackPlace);
+    }
 }
 
 function setCurrentCoords(coords) {
@@ -250,7 +269,6 @@ function initButtons() {
         mobileMenu.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Сброс флага через 500 мс
         setTimeout(() => touchHandled = false, 500);
     }
 
@@ -261,7 +279,6 @@ function initButtons() {
         mobileMenu.classList.remove('active');
         document.body.style.overflow = '';
 
-        // Сброс флага через 500 мс
         setTimeout(() => touchHandled = false, 500);
     }
 
@@ -283,11 +300,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     openSearchBtn?.addEventListener('click', openSearchOverlay);
 
     const main = document.querySelector(".content");
-    await showForecast();
+    await initWeatherAtStart();
     initSearchOverlay();
     initButtons();
     scrollToContent(main, "smooth", 50);
 });
 
 export { API_KEY_WEATHER, API_KEY_NEWS, combineWeatherDataForDay, setCurrentCoords, scrollToContent,
-    contactsBtn, homeBtn, aboutBtn, weatherBtn };
+    contactsBtn, homeBtn, aboutBtn, weatherBtn, defaultCoords };

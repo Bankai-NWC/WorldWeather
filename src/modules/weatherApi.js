@@ -1,35 +1,54 @@
-import { API_KEY_WEATHER, setCurrentCoords } from '../app.js';
+import { API_KEY_WEATHER, setCurrentCoords, defaultCoords } from '../app.js';
 
 async function getCoordinates(searchValue = null) {
     let coords = null;
+
     if (searchValue) {
         try {
             const apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=1&appid=${API_KEY_WEATHER}`;
             const response = await fetch(apiUrl);
             const data = await response.json();
-            
+
             if (data.length > 0) {
                 coords = { lat: data[0].lat, lon: data[0].lon };
             } else {
                 throw new Error("Location not found");
             }
         } catch (error) {
-            console.error("Error when searching for a location:", error);
             return null;
         }
+
     } else if ("geolocation" in navigator) {
         try {
             coords = await new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition(
-                    (position) => resolve({ lat: position.coords.latitude, lon: position.coords.longitude }),
-                    () => reject(new Error("Geolocation is not allowed"))
+                    (position) => {
+                        const result = {
+                            lat: position.coords.latitude,
+                            lon: position.coords.longitude
+                        };
+                        resolve(result);
+                    },
+                    (error) => {
+                        reject(new Error("Geolocation failed: " + error.message));
+                    },
+                    {
+                        timeout: 15000,
+                        enableHighAccuracy: true,
+                        maximumAge: 0
+                    }
                 );
             });
+
         } catch (error) {
-            console.error(error.message);
+            coords = null;
         }
+
     } else {
-        console.warn("Geolocation is not available. We use default coordinates.");
+        coords = defaultCoords;
+    }
+
+    if (!coords) {
         coords = defaultCoords;
     }
 
