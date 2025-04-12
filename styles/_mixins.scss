@@ -18,19 +18,23 @@
     background-color: transparent;
     border: none;
     -webkit-tap-highlight-color: transparent;
+    border-radius: 0;
 }
 
 @mixin reset-borders {
     border: none;
     outline: none;
+    border-radius: 0;
     
     &:focus {
         border: none;
         outline: none;
+        border-radius: 0;
     }
     &:active {
         border: none;
         outline: none;
+        border-radius: 0;
     }
 }
 

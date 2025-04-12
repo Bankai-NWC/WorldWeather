@@ -350,6 +350,7 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   width: 48px;
   aspect-ratio: 1;
   position: relative;
@@ -396,8 +397,10 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   border: none;
   outline: none;
+  border-radius: 0;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -407,10 +410,12 @@ h3 {
 .header__menu-link:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .header__menu-link:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (hover: hover) {
   .header__menu-link:hover::after {
@@ -555,6 +560,7 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   width: 48px;
   aspect-ratio: 1;
   position: absolute;
@@ -631,8 +637,10 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   border: none;
   outline: none;
+  border-radius: 0;
   width: 80%;
   color: var(--color-light);
   font-size: 24px;
@@ -641,10 +649,12 @@ h3 {
 .mobile-menu__link:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .mobile-menu__link:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (hover: hover) {
   .mobile-menu__link:hover {
@@ -663,6 +673,7 @@ h3 {
 .mobile-search__input {
   border: none;
   outline: none;
+  border-radius: 0;
   font-size: clamp(18px, 0.9722222222vw, 14px);
   width: 100%;
   height: var(--input-height);
@@ -671,18 +682,22 @@ h3 {
 .mobile-search__input:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .mobile-search__input:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .mobile-search__submit {
   padding: 0;
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   border: none;
   outline: none;
+  border-radius: 0;
   padding-inline: 16px;
   background-color: var(--color-light);
   color: var(--color-dark);
@@ -691,10 +706,12 @@ h3 {
 .mobile-search__submit:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .mobile-search__submit:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 
 .footer {
@@ -741,8 +758,10 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   border: none;
   outline: none;
+  border-radius: 0;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -752,10 +771,12 @@ h3 {
 .footer__menu-link:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .footer__menu-link:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (hover: hover) {
   .footer__menu-link:hover {
@@ -777,6 +798,7 @@ h3 {
 .footer__item {
   border: none;
   outline: none;
+  border-radius: 0;
   width: 44px;
   aspect-ratio: 1;
   display: flex;
@@ -789,10 +811,12 @@ h3 {
 .footer__item:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .footer__item:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (hover: hover) {
   .footer__item.facebook:hover {
@@ -873,15 +897,18 @@ h3 {
 .footer__created-by p a:focus {
   border: none;
   outline: none;
+  border-radius: 0;
   color: var(--color-light);
 }
 .footer__created-by p a:focus:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .footer__created-by p a:focus:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 
 .section {
@@ -910,8 +937,10 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   border: none;
   outline: none;
+  border-radius: 0;
   position: relative;
   color: var(--color-dark);
   padding: 10px 32px;
@@ -920,10 +949,12 @@ h3 {
 .weather-menu__button:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .weather-menu__button:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .weather-menu__button::after {
   content: "";
@@ -969,6 +1000,7 @@ h3 {
 .weather-menu__search {
   border: none;
   outline: none;
+  border-radius: 0;
   position: relative;
   display: flex;
   background-color: transparent;
@@ -978,10 +1010,12 @@ h3 {
 .weather-menu__search:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .weather-menu__search:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .weather-menu__search::after {
   content: "";
@@ -1014,6 +1048,7 @@ h3 {
 .weather-menu__input {
   border: none;
   outline: none;
+  border-radius: 0;
   position: relative;
   padding: 10px 12px;
   color: var(--color-dark);
@@ -1022,18 +1057,22 @@ h3 {
 .weather-menu__input:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .weather-menu__input:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .weather-menu__search-button {
   padding: 0;
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   border: none;
   outline: none;
+  border-radius: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1043,10 +1082,12 @@ h3 {
 .weather-menu__search-button:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .weather-menu__search-button:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (max-width: 1023px) {
   .weather-menu__search-button {
@@ -1058,6 +1099,7 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   padding: 8px 10px;
 }
 
@@ -1316,8 +1358,10 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   border: none;
   outline: none;
+  border-radius: 0;
   width: 100%;
   text-align: left;
   position: relative;
@@ -1329,10 +1373,12 @@ h3 {
 .maps__button:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .maps__button:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (max-width: 767px) {
   .maps__button {
@@ -1686,10 +1732,12 @@ h3 {
 .why-trust__button {
   border: none;
   outline: none;
+  border-radius: 0;
   padding: 0;
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   width: 100%;
   height: 100%;
   text-transform: uppercase;
@@ -1700,10 +1748,12 @@ h3 {
 .why-trust__button:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .why-trust__button:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 
 .news {
@@ -1785,6 +1835,7 @@ h3 {
 .news__link {
   border: none;
   outline: none;
+  border-radius: 0;
   display: block;
   font-weight: 700;
   width: 80%;
@@ -1795,10 +1846,12 @@ h3 {
 .news__link:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .news__link:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (hover: hover) {
   .news__link:hover {
@@ -1821,16 +1874,19 @@ h3 {
 .news__source-link {
   border: none;
   outline: none;
+  border-radius: 0;
   display: flex;
   color: var(--color-light-alt);
 }
 .news__source-link:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .news__source-link:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 
 .about-page {
@@ -1990,15 +2046,18 @@ h3 {
 .contact__email {
   border: none;
   outline: none;
+  border-radius: 0;
   color: var(--color-dark);
 }
 .contact__email:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .contact__email:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (hover: hover) {
   .contact__email:hover {
@@ -2041,6 +2100,7 @@ h3 {
 .contact__input {
   border: none;
   outline: none;
+  border-radius: 0;
   font-size: clamp(18px, 0.9722222222vw, 14px);
   width: 100%;
   height: var(--input-height);
@@ -2050,10 +2110,12 @@ h3 {
 .contact__input:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .contact__input:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .contact__input--textarea {
   height: 160px;
@@ -2087,8 +2149,10 @@ h3 {
   background-color: transparent;
   border: none;
   -webkit-tap-highlight-color: transparent;
+  border-radius: 0;
   border: none;
   outline: none;
+  border-radius: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2101,10 +2165,12 @@ h3 {
 .contact__button:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .contact__button:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (hover: hover) {
   .contact__button:hover {
@@ -2126,6 +2192,7 @@ h3 {
 .contact__socials-item {
   border: none;
   outline: none;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2138,10 +2205,12 @@ h3 {
 .contact__socials-item:focus {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 .contact__socials-item:active {
   border: none;
   outline: none;
+  border-radius: 0;
 }
 @media (hover: hover) {
   .contact__socials-item.facebook:hover {
