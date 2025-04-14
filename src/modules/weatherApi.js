@@ -138,19 +138,36 @@ async function getForecastSummary(searchValue) {
         }
     });
 
-    const dailyForecast = Object.keys(forecastByDay).slice(0, 5).map(dayKey => {
+    const dailyForecast = Object.keys(forecastByDay).sort().filter(dayKey => {
+        const todayUTC = new Date().toISOString().split('T')[0];
+        return dayKey > todayUTC;
+    }).slice(0, 5).map(dayKey => {
         const entries = forecastByDay[dayKey];
+
         let middayEntry = entries.find(e => e.dt_txt.includes("12:00:00"));
 
         if (!middayEntry) {
             middayEntry = entries.reduce((prev, curr) => {
-                const prevHour = new Date(prev.dt * 1000).getHours();
-                const currHour = new Date(curr.dt * 1000).getHours();
+                const prevHour = new Date(prev.dt * 1000).getUTCHours();
+                const currHour = new Date(curr.dt * 1000).getUTCHours();
                 return Math.abs(currHour - 12) < Math.abs(prevHour - 12) ? curr : prev;
             });
         }
 
         const date = new Date(middayEntry.dt * 1000);
+
+        const fullDateFormatter = new Intl.DateTimeFormat('en-US', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'short',
+            timeZone: 'UTC',
+        });
+
+        const shortDateFormatter = new Intl.DateTimeFormat('en-US', {
+            day: 'numeric',
+            month: 'short',
+            timeZone: 'UTC',
+        });
 
         return {
             minTemp: Math.round(Math.min(...entries.map(e => e.main.temp_min))),
@@ -161,10 +178,11 @@ async function getForecastSummary(searchValue) {
             windSpeed: middayEntry.wind.speed,
             pressure: middayEntry.main.pressure,
             sys: middayEntry.sys?.pod || '',
-            dateFormatted: date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short' }),
-            rangeOfDate: date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' }),
+            dateFormatted: fullDateFormatter.format(date),
+            rangeOfDate: shortDateFormatter.format(date),
         };
     });
+
 
     const averagePop = todayForecasts.length
         ? Math.round(todayForecasts.reduce((sum, item) => sum + item.pop, 0) / todayForecasts.length * 100)
